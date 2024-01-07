@@ -1,27 +1,25 @@
 <table class="table">
   <thead>
     <tr>
+      <th>&nbsp;</th>
       <th scope="col">Name</th>
       <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
       <th scope="col">Fiscal Code</th>
       <th scope="col">Phone</th>
       <th scope="col">Province</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Mario</td>
-      <td>Rossi</td>
-      <td>MRARSS77H13H501Z</td>
-      <td>0551234567</td>
-      <td>Firenze</td>
+    <tr *ngFor="let user of users;let i = index; trackBy: trackUser ">
+      <td>{{i+1}}</td>
+      <td>{{user.name }}</td>
+      <td>{{user.lastName }}</td>
+      <td>{{user.email }}</td>
+      <td>{{user.fiscalCode }}</td>
+      <td>{{user.phone }}</td>
+      <td>{{user.province }}</td>
     </tr>
-    <tr>
-      <td>Mario</td>
-      <td>Rossi</td>
-      <td>MRARSS77H13H501Z</td>
-      <td>0551234567</td>
-      <td>Firenze</td>
-    </tr>
+
   </tbody>
 </table>
