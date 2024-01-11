@@ -13,16 +13,8 @@
   <tbody>
     @for (user of users; track user.email; let i = $index) {
 
+    <app-user [counter]=i [user]=user></app-user>
 
-    <tr>
-      <td>{{i+1}}</td>
-      <td>{{user.name }}</td>
-      <td>{{user.lastName }}</td>
-      <td>{{user.email }}</td>
-      <td>{{user.fiscalCode }}</td>
-      <td>{{user.phone }}</td>
-      <td>{{user.province }}</td>
-    </tr>
     }
     @empty {
     <tr>
