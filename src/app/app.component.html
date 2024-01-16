@@ -1,2 +1,2 @@
 <h1>User Management System</h1>
-<app-users-list></app-users-list>
+<app-users-list [users]="users" (userDeleted)="onDeleteUser($event)"></app-users-list>

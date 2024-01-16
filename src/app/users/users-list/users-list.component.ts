@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User, UserService } from '../user.service';
 
 
@@ -10,19 +10,20 @@ import { User, UserService } from '../user.service';
 })
 export class UsersListComponent implements OnInit {
 
-  users: User[] = [];
+  @Input() users: User[] = [];
+  @Output() userDeleted = new EventEmitter<User>();
   trackUser(index: number, user: User): string {
     return user.email;
   }
-  constructor(private userService: UserService) {
-    console.log('constructor');
 
-  }
   ngOnInit(): void {
     console.log('View initialized');
-    this.users = this.userService.getUser();
+
   }
 
+  deleteUser(user: User): void {
+    this.userDeleted.emit(user);
 
+  }
 
 }

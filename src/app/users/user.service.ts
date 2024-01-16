@@ -25,10 +25,17 @@ export class UserService {
     { name: "Simone", lastName: "Arancio", fiscalCode: "ARNSMN80A01H501M", phone: "9012345678", province: "Catania", email: "simone.arancio@example.com" },
     { name: "Chiara", lastName: "Azzurra", fiscalCode: "AZZCHR80A01H501R", phone: "0123456789", province: "Bari", email: "chiara.azzurra@example.com" }
   ];
-  getUser(): User[] {
+  getUsers(): User[] {
     return this.users;
   }
   constructor() {
     console.log('user service created')
+  }
+  deleteUser(user: User): void {
+
+    const idx = this.users.findIndex(ele => ele.email === user.email);
+
+    this.users.splice(idx, 1);
+
   }
 }

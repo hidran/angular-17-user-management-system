@@ -8,12 +8,22 @@
       <th scope="col">Fiscal Code</th>
       <th scope="col">Phone</th>
       <th scope="col">Province</th>
+      <th>&nbsp;</th>
     </tr>
   </thead>
   <tbody>
     @for (user of users; track user.email; let i = $index) {
 
-    <app-user [counter]=i [user]=user></app-user>
+    <tr>
+      <td>{{i}}</td>
+      <td>{{user.name }}</td>
+      <td>{{user.lastName }}</td>
+      <td>{{user.email }}</td>
+      <td>{{user.fiscalCode }}</td>
+      <td>{{user.phone }}</td>
+      <td>{{user.province }}</td>
+      <td><button (click)="deleteUser(user)" class="delete-button">DELETE</button></td>
+    </tr>
 
     }
     @empty {
