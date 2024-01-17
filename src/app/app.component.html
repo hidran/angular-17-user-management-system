@@ -1,2 +1,13 @@
-<h1>User Management System</h1>
-<app-users-list [users]="users" (userDeleted)="onDeleteUser($event)"></app-users-list>
+<header>
+  <app-navbar></app-navbar>
+</header>
+
+<!-- Begin page content -->
+<main class="flex-shrink-0">
+  <div class="container">
+
+    <h1>User Management System</h1>
+    <app-users-list [users]="users" (userDeleted)="onDeleteUser($event)"></app-users-list>
+  </div>
+</main>
+<app-theme-toggler></app-theme-toggler>
