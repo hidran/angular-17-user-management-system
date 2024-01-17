@@ -12,6 +12,7 @@ export class UsersListComponent implements OnInit {
 
   @Input() users: User[] = [];
   @Output() userDeleted = new EventEmitter<User>();
+  @Output() userToBeUpdated = new EventEmitter<User>();
   trackUser(index: number, user: User): string {
     return user.email;
   }
@@ -24,6 +25,9 @@ export class UsersListComponent implements OnInit {
   deleteUser(user: User): void {
     this.userDeleted.emit(user);
 
+  }
+  updateUser(user: User): void {
+    this.userToBeUpdated.emit(user);
   }
 
 }

@@ -4,10 +4,17 @@
 
 <!-- Begin page content -->
 <main class="flex-shrink-0">
-  <div class="container">
-
-    <h1>User Management System</h1>
-    <app-users-list [users]="users" (userDeleted)="onDeleteUser($event)"></app-users-list>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col col-md-8">
+        <h1>User Management System</h1>
+        <app-users-list [users]="users" (userDeleted)="onDeleteUser($event)"
+          (userToBeUpdated)="showUserForm($event)"></app-users-list>
+      </div>
+      <div class="col col-md-4">
+        User form
+      </div>
+    </div>
   </div>
 </main>
 <app-footer></app-footer>

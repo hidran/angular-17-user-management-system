@@ -22,9 +22,20 @@
       <td>{{user.fiscalCode }}</td>
       <td>{{user.phone }}</td>
       <td>{{user.province }}</td>
-      <td><button class="btn btn-danger" (click)="deleteUser(user)">
-          <i class="bi bi-trash"></i>
-        </button></td>
+      <td>
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col">
+            <button class="btn btn-primary" (click)="updateUser(user)">
+              <i class="bi bi-pen"></i>
+            </button>
+          </div>
+          <div class="col">
+            <button class="btn btn-danger" (click)="deleteUser(user)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </td>
     </tr>
 
     }
