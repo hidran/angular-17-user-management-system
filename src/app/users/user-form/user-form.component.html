@@ -1,0 +1,36 @@
+<form>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" required [(ngModel)]="user.name" id="name" name="name" class="form-control"
+      placeholder="User name">
+  </div>
+  <div class="mb-3">
+    <label for="lastName" class="form-label">Last Name</label>
+    <input type="text" id="lastName" [(ngModel)]="user.lastName" name="lastName" class="form-control"
+      placeholder="User name">
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" required id="email" [(ngModel)]="user.email" name="email" class="form-control"
+      placeholder="johndoe@gmail.com">
+  </div>
+  <div class="mb-3">
+    <label for="fiscalCode" class="form-label">Fiscal Code</label>
+    <input type="text" id="fiscalCode" [(ngModel)]="user.fiscalCode" name="fiscalCode" class="form-control"
+      placeholder="Fiscal code">
+  </div>
+  <div class="mb-3">
+    <label for="lastName" class="form-label">Phone</label>
+    <input type="phone" id="phone" name="phone" [(ngModel)]="user.phone" class="form-control" placeholder="phone">
+  </div>
+  <div class="mb-3">
+    <label for="province" class="form-label">Phone</label>
+    <input type="text" id="province" name="province" [(ngModel)]="user.province" class="form-control"
+      placeholder="phone">
+  </div>
+
+  <div class="mb-3 text-center">
+    <button type="submit" class="btn btn-primary me-2">Submit</button>
+    <button type="reset" class="btn btn-secondary ms-2">Reset</button>
+  </div>
+</form>

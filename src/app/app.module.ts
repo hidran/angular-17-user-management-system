@@ -16,6 +16,7 @@ import { FooterComponent } from './footer/footer.component';
     FooterComponent
 
 
+
   ],
   providers: [
     provideClientHydration()

@@ -7,8 +7,10 @@ import { User, UserService } from './users/user.service';
 
 })
 export class AppComponent {
-
-  title = 'ums';
+  userCols = 12;
+  formCol = 0;
+  title = 'User Management System';
+  selectedUser: User | null = null;
   userService = inject(UserService);
   users = this.userService.getUsers();
 
@@ -17,7 +19,8 @@ export class AppComponent {
     this.users = this.userService.getUsers();
   }
   showUserForm(user: User): void {
-    alert(user.email)
-
+    this.selectedUser = { ...user };// Object.assign({}, user)
+    this.userCols = 8;
+    this.formCol = 4;
   }
 }
