@@ -7,6 +7,7 @@ import { User, UserService } from './users/user.service';
 
 })
 export class AppComponent {
+
   userCols = 12;
   formCol = 0;
   title = 'User Management System';
@@ -22,5 +23,12 @@ export class AppComponent {
     this.selectedUser = { ...user };// Object.assign({}, user)
     this.userCols = 8;
     this.formCol = 4;
+  }
+  onUserUpdate(user: User) {
+    this.userService.updateUser(user);
+    this.users = this.userService.getUsers();
+    this.selectedUser = null;
+    this.userCols = 12;
+    this.formCol = 0;
   }
 }

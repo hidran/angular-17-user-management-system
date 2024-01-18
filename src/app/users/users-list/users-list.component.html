@@ -12,10 +12,10 @@
     </tr>
   </thead>
   <tbody>
-    @for (user of users; track user.email; let i = $index) {
+    @for (user of users; track user.email) {
 
     <tr>
-      <td>{{i}}</td>
+      <td>{{user.id}}</td>
       <td>{{user.name }}</td>
       <td>{{user.lastName }}</td>
       <td>{{user.email }}</td>
