@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { User, UserService } from '../user.service';
 import { NgForm } from '@angular/forms';
 
@@ -8,13 +8,23 @@ import { NgForm } from '@angular/forms';
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.css'
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit {
+  resetForm(f: NgForm) {
+
+    console.log(this.originalUser)
+    f.resetForm(this.originalUser);
+
+  }
 
 
   constructor(private userService: UserService) {
 
   }
+  ngOnInit(): void {
+    this.originalUser = { ...this.user }
+  }
   @Input() user: Partial<User> = {};
+  originalUser: Partial<User> = {};
   @Output() updateUser = new EventEmitter<User>();
   onSubmitForm(f: NgForm) {
 

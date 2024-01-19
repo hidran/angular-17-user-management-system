@@ -7,16 +7,9 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col">
-        <h1>{{title}}</h1>
-        <app-users-list [users]="users" (userDeleted)="onDeleteUser($event)"
-          (userToBeUpdated)="showUserForm($event)"></app-users-list>
+        <router-outlet></router-outlet>
       </div>
-      @if(selectedUser){
-      <div class="col">
-        <h2>User form</h2>
-        <app-user-form (updateUser)="onUserUpdate($event)" [user]="selectedUser"></app-user-form>
-      </div>
-      }
+
     </div>
   </div>
 </main>

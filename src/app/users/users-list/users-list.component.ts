@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { User, UserService } from '../user.service';
 
 
@@ -10,15 +10,19 @@ import { User, UserService } from '../user.service';
 })
 export class UsersListComponent implements OnInit {
 
-  @Input() users: User[] = [];
+  users: User[] = [];
+
+  userService = inject(UserService);
+
   @Output() userDeleted = new EventEmitter<User>();
   @Output() userToBeUpdated = new EventEmitter<User>();
+
   trackUser(index: number, user: User): string {
     return user.email;
   }
 
   ngOnInit(): void {
-    console.log('View initialized');
+    this.users = this.userService.getUsers();
 
   }
 
