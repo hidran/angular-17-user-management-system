@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { User, UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,10 +13,12 @@ export class UsersListComponent implements OnInit {
 
   users: User[] = [];
 
-  userService = inject(UserService);
 
+  constructor(private userService: UserService, private router: Router) {
+
+  }
   @Output() userDeleted = new EventEmitter<User>();
-  @Output() userToBeUpdated = new EventEmitter<User>();
+
 
   trackUser(index: number, user: User): string {
     return user.email;
@@ -31,7 +34,7 @@ export class UsersListComponent implements OnInit {
 
   }
   updateUser(user: User): void {
-    this.userToBeUpdated.emit(user);
+    this.router.navigate(['users', user.id]);
   }
 
 }
