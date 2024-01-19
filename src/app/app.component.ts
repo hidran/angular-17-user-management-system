@@ -1,34 +1,44 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { User, UserService } from './users/user.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
 
-  userCols = 12;
-  formCol = 0;
+
   title = 'User Management System';
-  selectedUser: User | null = null;
   userService = inject(UserService);
-  users = this.userService.getUsers();
+  userUpdatedSub: Subscription;
+  userDeletedSub: Subscription;
 
+  constructor() {
+    this.userUpdatedSub = this.userService.userUpdated.subscribe(user => {
+      this.onUserUpdate(user);
+      console.log('user updated')
+    }
+    );
+    this.userDeletedSub = this.userService.userDeleted.subscribe(user => {
+      this.onDeleteUser(user);
+    })
+
+
+  }
+  ngOnDestroy(): void {
+    this.userUpdatedSub.unsubscribe();
+    this.userDeletedSub.unsubscribe();
+    console.log('app destroyed');
+  }
   onDeleteUser(user: User): void {
     this.userService.deleteUser(user);
-    this.users = this.userService.getUsers();
+
   }
-  showUserForm(user: User): void {
-    this.selectedUser = { ...user };// Object.assign({}, user)
-    this.userCols = 8;
-    this.formCol = 4;
-  }
+
   onUserUpdate(user: User) {
     this.userService.updateUser(user);
-    this.users = this.userService.getUsers();
-    this.selectedUser = null;
-    this.userCols = 12;
-    this.formCol = 0;
+
   }
 }

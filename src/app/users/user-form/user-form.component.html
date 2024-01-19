@@ -1,4 +1,5 @@
 <form #userForm="ngForm" (ngSubmit)="onSubmitForm(userForm)">
+  @if(user){
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
     <input type="text" #name="ngModel" required [(ngModel)]="user.name" id="name" name="name" class="form-control"
@@ -48,8 +49,13 @@
     <input type="text" id="province" name="province" [(ngModel)]="user.province" class="form-control"
       placeholder="phone">
   </div>
+  }
+  @else {
+  <div class="alert alert-danger">User not found</div>
+  }
 
   <div class="mb-3 text-center">
+    <a [routerLink]="['/users']" class="btn btn-info me-2">Back</a>
     <button type="submit" [disabled]="!userForm.valid" class="btn btn-primary me-2">Submit</button>
     <button type="button" (click)="resetForm(userForm)" class="btn btn-secondary ms-2">Reset</button>
   </div>

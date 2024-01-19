@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  providers: [UserService],
+  providers: [],
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css'
@@ -17,7 +17,7 @@ export class UsersListComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {
 
   }
-  @Output() userDeleted = new EventEmitter<User>();
+
 
 
   trackUser(index: number, user: User): string {
@@ -30,7 +30,7 @@ export class UsersListComponent implements OnInit {
   }
 
   deleteUser(user: User): void {
-    this.userDeleted.emit(user);
+    this.userService.userDeleted.next(user);
 
   }
   updateUser(user: User): void {

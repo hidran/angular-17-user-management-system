@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 export interface User {
   id: number;
   name: string;
@@ -13,6 +14,10 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
+
+  userUpdated = new Subject<User>();
+  userDeleted = new Subject<User>();
+
   users: User[] = [
     { id: 1, name: "Mario", lastName: "Rossi", fiscalCode: "RSSMRA80A01H501U", phone: "1234567890", province: "Roma", email: "mario.rossi@example.com" },
     { id: 2, name: "Luigi", lastName: "Bianchi", fiscalCode: "BNCLGU80A01H501V", phone: "0987654321", province: "Milano", email: "luigi.bianchi@example.com" },
@@ -29,6 +34,14 @@ export class UserService {
   getUsers(): User[] {
     return this.users;
   }
+  getUser(id: number): User | null {
+    const idx = this.users.findIndex(ele => ele.id === id);
+
+    if (idx === -1) {
+      return null;
+    }
+    return { ...this.users[idx] };
+  }
   constructor() {
     console.log('user service created')
   }
@@ -42,10 +55,12 @@ export class UserService {
   updateUser(user: User): boolean {
 
     const idx = this.users.findIndex(ele => ele.id === user.id);
+
     if (idx === -1) {
       return false;
     }
     this.users[idx] = { ...user };
+
     return true;
   }
 }
