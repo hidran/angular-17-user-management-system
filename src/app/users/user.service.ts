@@ -16,6 +16,7 @@ export interface User {
 export class UserService {
 
   userUpdated = new Subject<User>();
+  userCreated = new Subject<User>();
   userDeleted = new Subject<User>();
 
   users: User[] = [
@@ -60,6 +61,18 @@ export class UserService {
       return false;
     }
     this.users[idx] = { ...user };
+
+    return true;
+  }
+  createUser(user: User): boolean {
+
+    const idx = this.users.findIndex(ele => ele.email === user.email);
+
+    if (idx !== -1) {
+      return false;
+    }
+    user.id = this.users.length + 1;
+    this.users.push(user);
 
     return true;
   }

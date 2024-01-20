@@ -12,6 +12,12 @@ const routes: Routes = [{
   redirectTo: 'users',
   pathMatch: 'full'
 },
+
+{
+  path: 'users/create',
+  component: UserFormComponent,
+  pathMatch: 'full'
+},
 {
   path: 'users/:id',
   component: UserFormComponent

@@ -14,7 +14,7 @@ export class AppComponent implements OnDestroy {
   userService = inject(UserService);
   userUpdatedSub: Subscription;
   userDeletedSub: Subscription;
-
+  userCreatedSub: Subscription;
   constructor() {
     this.userUpdatedSub = this.userService.userUpdated.subscribe(user => {
       this.onUserUpdate(user);
@@ -23,7 +23,10 @@ export class AppComponent implements OnDestroy {
     );
     this.userDeletedSub = this.userService.userDeleted.subscribe(user => {
       this.onDeleteUser(user);
-    })
+    });
+    this.userCreatedSub = this.userService.userCreated.subscribe(user => {
+      this.onCreateUser(user);
+    });
 
 
   }
@@ -37,8 +40,12 @@ export class AppComponent implements OnDestroy {
 
   }
 
-  onUserUpdate(user: User) {
+  onUserUpdate(user: User): void {
     this.userService.updateUser(user);
+
+  }
+  onCreateUser(user: User) {
+    this.userService.createUser(user);
 
   }
 }
