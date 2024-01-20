@@ -33,6 +33,7 @@ export class AppComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.userUpdatedSub.unsubscribe();
     this.userDeletedSub.unsubscribe();
+    this.userCreatedSub.unsubscribe();
     console.log('app destroyed');
   }
   onDeleteUser(user: User): void {
