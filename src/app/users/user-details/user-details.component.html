@@ -1,0 +1,72 @@
+<h1>Users Detail</h1>
+<table *ngIf="user" class="table table-small table-striped table-dark table-bordered">
+
+  <tbody>
+
+    <tr>
+      <th>
+        ID
+      </th>
+      <td>
+        {{user.id}}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Name
+      </th>
+      <td>
+        {{user.name}}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Last Name
+      </th>
+      <td>
+        {{user.lastName}}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Email
+      </th>
+      <td>
+        {{user.email}}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Phone
+      </th>
+      <td>
+        {{user.phone}}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        Fiscal Code
+      </th>
+      <td>
+        {{user.fiscalCode}}
+      </td>
+    </tr>
+    <tr>
+      <th>
+        {{user.province}}
+      </th>
+      <td>
+
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2" class="text-center">
+        <a routerLink="/users" class="btn btn-primary"> BACK</a>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<div *ngIf="!user" class="alert alert-danger">USER NOT FOUND</div>
