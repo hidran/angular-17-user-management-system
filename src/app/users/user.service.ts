@@ -26,13 +26,8 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
   }
-  getUser(id: number): User | null {
-    const idx = this.users.findIndex(ele => ele.id === id);
-
-    if (idx === -1) {
-      return null;
-    }
-    return { ...this.users[idx] };
+  getUser(id: number): Observable<User | null> {
+    return this.http.get<User>(this.apiUrl + '/' + id);
   }
   constructor(private http: HttpClient) {
     console.log('user service created')

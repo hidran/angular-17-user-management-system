@@ -1,5 +1,6 @@
 <h1>Users Detail</h1>
-<table *ngIf="user" class="table table-small table-striped table-dark table-bordered">
+@if(user$ | async; as user){
+<table class="table table-small table-striped table-dark table-bordered">
 
   <tbody>
 
@@ -68,5 +69,6 @@
     </tr>
   </tfoot>
 </table>
-
-<div *ngIf="!user" class="alert alert-danger">USER NOT FOUND</div>
+} @else {
+<div class="alert alert-danger">USER NOT FOUND</div>
+}

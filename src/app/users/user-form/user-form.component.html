@@ -1,7 +1,8 @@
 <form #userForm="ngForm" (ngSubmit)="onSubmitForm(userForm)">
-  @if(user){
+  @if(user$ | async; as user){
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
+    <input type="hidden" name="id" [(ngModel)]="user.id">
     <input type="text" #name="ngModel" required [(ngModel)]="user.name" id="name" name="name" class="form-control"
       minlength="4" placeholder="User name">
     @if(name.invalid && (name.dirty || name.touched)){

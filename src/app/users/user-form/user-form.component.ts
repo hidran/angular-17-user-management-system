@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { User, UserService } from '../user.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, of, switchMap } from 'rxjs';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UserFormComponent implements OnInit {
 
-  user: User | null = null;
+  user$: Observable<User | null> = of(null);
   originalUser: Partial<User> = {};
   @Output() updateUser = new EventEmitter<User>();
 
@@ -22,17 +23,19 @@ export class UserFormComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.originalUser = { ...this.user };
-    this.route.paramMap.subscribe(p => {
-      const segment = p.get('id');
-      if (!segment) {
-        this.initUser();
-        return;
-      }
-      const id = Number(segment);
-      this.user = this.userService.getUser(id);
-      console.log(id, this.user)
-    });
+    this.user$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        const segment = params.get('id');
+
+        const id = Number(segment);
+        if (id) {
+          return this.userService.getUser(id);
+        } else {
+          return of(null);
+        }
+
+      })
+    );
   }
   resetForm(f: NgForm) {
 
@@ -45,7 +48,7 @@ export class UserFormComponent implements OnInit {
 
 
   onSubmitForm(f: NgForm) {
-    const id = this.user?.id ?? 0;
+    const id = f.value.id ?? 0;
     const userUpdated = { ...f.value, id };
 
     if (!id) {
@@ -58,7 +61,7 @@ export class UserFormComponent implements OnInit {
 
   }
   private initUser() {
-    this.user = {
+    this.user$ = of({
       id: 0,
       name: '',
       fiscalCode: '',
@@ -66,6 +69,6 @@ export class UserFormComponent implements OnInit {
       email: '',
       phone: '',
       province: ''
-    }
+    })
   }
 }

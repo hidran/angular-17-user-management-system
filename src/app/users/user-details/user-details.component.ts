@@ -2,6 +2,7 @@ import { UserService } from './../user.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../user.service';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-user-details',
@@ -9,7 +10,8 @@ import { User } from '../user.service';
   styleUrl: './user-details.component.css'
 })
 export class UserDetailsComponent implements OnInit {
-  user: User | null = null;
+
+  user$: Observable<User | null> = of(null);
   constructor(
     private route: ActivatedRoute,
     private userService: UserService
@@ -17,12 +19,20 @@ export class UserDetailsComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.route.paramMap.subscribe(p => {
-      const segment = p.get('id');
+    this.user$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        const segment = params.get('id');
 
-      const id = Number(segment);
-      this.user = this.userService.getUser(id);
+        const id = Number(segment);
+        if (id) {
+          return this.userService.getUser(id);
+        } else {
+          return of(null);
+        }
 
-    });
+      })
+    );
+
+
   }
 }

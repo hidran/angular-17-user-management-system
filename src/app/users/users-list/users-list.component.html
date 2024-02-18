@@ -11,7 +11,8 @@
       <th>&nbsp;</th>
     </tr>
   </thead>
-  <tbody *ngIf="users$ | async as users ">
+  @if(users$ | async ; as users ) {
+  <tbody>
     @for (user of users; track user.email) {
 
     <tr>
@@ -50,4 +51,5 @@
     </tr>
     }
   </tbody>
+  }
 </table>
