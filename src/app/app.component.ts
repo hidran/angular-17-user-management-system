@@ -37,16 +37,17 @@ export class AppComponent implements OnDestroy {
     console.log('app destroyed');
   }
   onDeleteUser(user: User): void {
-    this.userService.deleteUser(user);
+    this.userService.deleteUser(user)
+      .subscribe(console.log);
 
   }
 
   onUserUpdate(user: User): void {
-    this.userService.updateUser(user);
+    this.userService.updateUser(user).subscribe(console.log);;
 
   }
   onCreateUser(user: User) {
-    this.userService.createUser(user);
+    this.userService.createUser(user).subscribe(console.log);;
 
   }
 }

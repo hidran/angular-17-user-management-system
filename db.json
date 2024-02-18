@@ -1,16 +1,16 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Mario",
+      "id": "1",
+      "name": "Mario11",
       "lastName": "Rossi",
+      "email": "mario.rossi@example.com",
       "fiscalCode": "RSSMRA80A01H501U",
       "phone": "1234567890",
-      "province": "Roma",
-      "email": "mario.rossi@example.com"
+      "province": "Roma"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Luigi",
       "lastName": "Bianchi",
       "fiscalCode": "BNCLGU80A01H501V",
@@ -19,7 +19,7 @@
       "email": "luigi.bianchi@example.com"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Giulia",
       "lastName": "Verdi",
       "fiscalCode": "VRDGIL80A01H501K",
@@ -28,7 +28,7 @@
       "email": "giulia.verdi@example.com"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Elena",
       "lastName": "Gialli",
       "fiscalCode": "GLLELN80A01H501S",
@@ -37,7 +37,7 @@
       "email": "elena.gialli@example.com"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Marco",
       "lastName": "Neri",
       "fiscalCode": "NRIMRC80A01H501N",
@@ -46,7 +46,7 @@
       "email": "marco.neri@example.com"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Alessia",
       "lastName": "Marrone",
       "fiscalCode": "MRRALS80A01H501Q",
@@ -55,7 +55,7 @@
       "email": "alessia.marrone@example.com"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Andrea",
       "lastName": "Celeste",
       "fiscalCode": "CLSTND80A01H501Z",
@@ -64,40 +64,13 @@
       "email": "andrea.celeste@example.com"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Sara",
       "lastName": "Rosa",
+      "email": "sara.rosa@example.com",
       "fiscalCode": "RSASRA80A01H501X",
       "phone": "7890123456",
-      "province": "Firenze",
-      "email": "sara.rosa@example.com"
-    },
-    {
-      "id": 9,
-      "name": "Paolo",
-      "lastName": "Viola",
-      "fiscalCode": "VLAPAO80A01H501C",
-      "phone": "8901234567",
-      "province": "Venezia",
-      "email": "paolo.viola@example.com"
-    },
-    {
-      "id": 10,
-      "name": "Simone",
-      "lastName": "Arancio",
-      "fiscalCode": "ARNSMN80A01H501M",
-      "phone": "9012345678",
-      "province": "Catania",
-      "email": "simone.arancio@example.com"
-    },
-    {
-      "id": 11,
-      "name": "Chiara",
-      "lastName": "Azzurra",
-      "fiscalCode": "AZZCHR80A01H501R",
-      "phone": "0123456789",
-      "province": "Bari",
-      "email": "chiara.azzurra@example.com"
+      "province": "Firenze"
     }
   ]
 }

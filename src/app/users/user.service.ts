@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 export interface User {
   id: number;
@@ -20,7 +20,9 @@ export class UserService {
   userUpdated = new Subject<User>();
   userCreated = new Subject<User>();
   userDeleted = new Subject<User>();
-  //private http2 = inject(HttpClient)
+
+  public usersSubject = new BehaviorSubject<boolean>(false);
+
   users: User[] = [
   ];
   getUsers(): Observable<User[]> {
@@ -30,37 +32,35 @@ export class UserService {
     return this.http.get<User>(this.apiUrl + '/' + id);
   }
   constructor(private http: HttpClient) {
-    console.log('user service created')
+    console.log('user service created');
+    this.usersSubject.next(true);
   }
-  deleteUser(user: User): void {
-
-    const idx = this.users.findIndex(ele => ele.id === user.id);
-
-    this.users.splice(idx, 1);
+  deleteUser(user: User): Observable<void> {
+    return this.http.delete<void>(this.apiUrl + '/' + user.id)
+      .pipe(
+        tap(res => {
+          this.usersSubject.next(true);
+        })
+      );
 
   }
-  updateUser(user: User): boolean {
+  updateUser(user: User): Observable<User> {
 
-    const idx = this.users.findIndex(ele => ele.id === user.id);
+    return this.http.put<User>(this.apiUrl + '/' + user.id, user).pipe(
+      tap(res => {
+        this.usersSubject.next(true);
+      })
+    );;
 
-    if (idx === -1) {
-      return false;
-    }
-    this.users[idx] = { ...user };
-
-    return true;
   }
-  createUser(user: User): boolean {
+  createUser(user: User): Observable<User> {
 
-    const idx = this.users.findIndex(ele => ele.email === user.email);
+    return this.http.post<User>(this.apiUrl, user).pipe(
+      tap(res => {
+        this.usersSubject.next(true);
+      })
+    );;
 
-    if (idx !== -1) {
-      return false;
-    }
-    user.id = this.users.length + 1;
-    this.users.push(user);
-
-    return true;
   }
 }
 
