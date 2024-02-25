@@ -31,7 +31,7 @@ export class UserFormComponent implements OnInit {
         if (id) {
           return this.userService.getUser(id);
         } else {
-          return of(null);
+          return this.initUser();
         }
 
       })
@@ -52,6 +52,7 @@ export class UserFormComponent implements OnInit {
     const userUpdated = { ...f.value, id };
 
     if (!id) {
+      delete (userUpdated.id);
       this.userService.userCreated.next(userUpdated);
     } else {
       this.userService.userUpdated.next(userUpdated);
@@ -60,8 +61,8 @@ export class UserFormComponent implements OnInit {
     this.router.navigateByUrl('/users');
 
   }
-  private initUser() {
-    this.user$ = of({
+  private initUser(): Observable<User> {
+    return of({
       id: 0,
       name: '',
       fiscalCode: '',

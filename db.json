@@ -31,10 +31,10 @@
       "id": "4",
       "name": "Elena",
       "lastName": "Gialli",
+      "email": "elena.gialli@example.com",
       "fiscalCode": "GLLELN80A01H501S",
       "phone": "3456789012",
-      "province": "Napoli",
-      "email": "elena.gialli@example.com"
+      "province": "Napoli"
     },
     {
       "id": "5",
@@ -64,13 +64,22 @@
       "email": "andrea.celeste@example.com"
     },
     {
-      "id": "8",
-      "name": "Sara",
-      "lastName": "Rosa",
-      "email": "sara.rosa@example.com",
-      "fiscalCode": "RSASRA80A01H501X",
-      "phone": "7890123456",
-      "province": "Firenze"
+      "id": 0,
+      "name": "My new user",
+      "lastName": "lastname",
+      "email": "hidrantest1@dfsdfds.it",
+      "fiscalCode": "",
+      "phone": "",
+      "province": ""
+    },
+    {
+      "id": "76a6",
+      "name": "fdfgdfg",
+      "lastName": "dfgdfg",
+      "email": "dfgdfgfd@sdfsdfds1",
+      "fiscalCode": "",
+      "phone": "",
+      "province": ""
     }
   ]
 }

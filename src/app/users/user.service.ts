@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 export interface User {
   id: number;
@@ -26,7 +26,12 @@ export class UserService {
   users: User[] = [
   ];
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
+    if (this.users.length) {
+      return of(this.users);
+    }
+    return this.http.get<User[]>(this.apiUrl).pipe(
+      tap(res => this.users = res)
+    );
   }
   getUser(id: number): Observable<User | null> {
     return this.http.get<User>(this.apiUrl + '/' + id);
@@ -39,6 +44,7 @@ export class UserService {
     return this.http.delete<void>(this.apiUrl + '/' + user.id)
       .pipe(
         tap(res => {
+          this.users = [];
           this.usersSubject.next(true);
         })
       );
@@ -48,6 +54,7 @@ export class UserService {
 
     return this.http.put<User>(this.apiUrl + '/' + user.id, user).pipe(
       tap(res => {
+        this.users = [];
         this.usersSubject.next(true);
       })
     );;
@@ -57,9 +64,10 @@ export class UserService {
 
     return this.http.post<User>(this.apiUrl, user).pipe(
       tap(res => {
+        this.users = [];
         this.usersSubject.next(true);
       })
-    );;
+    );
 
   }
 }
