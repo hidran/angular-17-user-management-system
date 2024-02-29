@@ -7,7 +7,7 @@ export class AuthService {
 
   constructor() { }
   signIn(email: string, password: string): void {
-
+    console.log(email, password);
   }
   signUp(username: string, email: string, password: string): void {
 
