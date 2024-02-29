@@ -8,13 +8,15 @@ import { ThemeTogglerComponent } from './theme-toggler/theme-toggler.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ThemeTogglerComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
 
 
 
