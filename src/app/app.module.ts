@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +18,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     ThemeTogglerComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
 
 
 
   ],
   providers: [
-    provideClientHydration(),
+    // provideClientHydration(),
 
   ],
   bootstrap: [AppComponent],

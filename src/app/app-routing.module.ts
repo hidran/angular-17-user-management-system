@@ -5,6 +5,7 @@ import { UserFormComponent } from './users/user-form/user-form.component';
 import { UserDetailsComponent } from './users/user-details/user-details.component';
 import { activateUsersFn } from './users/activate-users-fn';
 import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [{
   path: 'users',
@@ -37,6 +38,10 @@ const routes: Routes = [{
 {
   path: 'login',
   component: LoginComponent
+},
+{
+  path: 'signup',
+  component: SignupComponent
 }
 ];
 

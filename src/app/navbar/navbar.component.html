@@ -19,7 +19,21 @@ true}" aria-current="page" routerLinkActive="active" href="#" routerLink="/users
           <a class="nav-link" [routerLinkActiveOptions]="{exact:
 true}" routerLinkActive="active" routerLink="users/create">New User</a>
         </li>
+        <ng-container *ngIf="!(isLoggedIn$| async)">
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActiveOptions]="{exact:
+  true}" routerLinkActive="active" routerLink="/login">Login</a>
+          </li>
 
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActiveOptions]="{exact:
+    true}" routerLinkActive="active" routerLink="/signup">Signup</a>
+          </li>
+        </ng-container>
+        <li class="nav-item" *ngIf="(isLoggedIn$| async)">
+          <a class="nav-link" [routerLinkActiveOptions]="{exact:
+      true}" routerLinkActive="active" routerLink="/logout" (click)="logout()">Logout</a>
+        </li>
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
