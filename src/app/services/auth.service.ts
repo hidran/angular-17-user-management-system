@@ -7,6 +7,13 @@ export interface UserData {
   email: string;
   name: string;
   lastName: string;
+
+}
+export interface UserAuthData {
+  email: string;
+  name?: string;
+  lastName?: string;
+  password: string
 }
 export interface JwtToken {
   access_token: string;
@@ -27,7 +34,12 @@ export class AuthService {
     this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
   }
   signIn(email: string, password: string): Observable<UserData> {
-    return this.http.post<JwtToken>(this.AUTH_URL + 'login', { email, password })
+    return this.getUserAuth({ email, password }, 'login');
+
+
+  }
+  private getUserAuth(user: UserAuthData, url: string): Observable<UserData> {
+    return this.http.post<JwtToken>(this.AUTH_URL + url, user)
       .pipe(switchMap(response => {
         localStorage.setItem('jwt', response.access_token);
         localStorage.setItem('user', JSON.stringify(response.user));
@@ -35,12 +47,10 @@ export class AuthService {
         return of(response.user);
 
       }));
-
-
   }
-  signUp(username: string, email: string, password: string): void {
-    localStorage.setItem('jwt', this.token);
-    this.isLoggedInSubject.next(true);
+
+  signUp(name: string, email: string, password: string): Observable<UserData> {
+    return this.getUserAuth({ email, password, name }, 'register');
   }
   isUserLogin(): boolean {
     return this.hasToken();

@@ -31,8 +31,10 @@ export class SignupComponent implements OnInit {
     console.log(this.signupForm)
     if (this.signupForm.valid) {
       const { username, email, password } = this.signupForm.value;
-      this.auth.signUp(username, email, password);
-      this.router.navigate(['/']);
+      this.auth.signUp(username, email, password).subscribe(() => {
+        this.router.navigate(['/']);
+      });
+
 
     }
   }
