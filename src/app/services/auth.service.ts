@@ -52,4 +52,7 @@ export class AuthService {
   private hasToken(): boolean {
     return Boolean(window.localStorage.getItem('jwt'));
   }
+  public getToken(): string | null {
+    return window.localStorage.getItem('jwt') ?? null;
+  }
 }
