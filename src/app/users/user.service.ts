@@ -34,7 +34,7 @@ export class UserService {
   protected getAuthHeaders(): HttpHeaders {
     const token = this.auth.getToken();
     return new HttpHeaders({
-      Authorization: `Bearer ${token}`
+      //Authorization: `Bearer ${token}`
     })
   }
   getUsers(): Observable<User[]> {
@@ -42,16 +42,16 @@ export class UserService {
       return of(this.users);
     }
 
-    return this.http.get<User[]>(this.apiUrl, { withCredentials: true, headers: this.getAuthHeaders() }).pipe(
+    return this.http.get<User[]>(this.apiUrl).pipe(
       tap(res => this.users = res)
     );
   }
   getUser(id: number): Observable<User | null> {
-    return this.http.get<User>(this.apiUrl + '/' + id, { headers: this.getAuthHeaders() });
+    return this.http.get<User>(this.apiUrl + '/' + id);
   }
 
   deleteUser(user: User): Observable<void> {
-    return this.http.delete<void>(this.apiUrl + '/' + user.id, { headers: this.getAuthHeaders() })
+    return this.http.delete<void>(this.apiUrl + '/' + user.id)
       .pipe(
         tap(res => {
           this.users = [];
@@ -62,7 +62,7 @@ export class UserService {
   }
   updateUser(user: User): Observable<User> {
 
-    return this.http.put<User>(this.apiUrl + '/' + user.id, user, { headers: this.getAuthHeaders() }).pipe(
+    return this.http.put<User>(this.apiUrl + '/' + user.id, user).pipe(
       tap(res => {
         this.users = [];
         this.usersSubject.next(true);
@@ -72,7 +72,7 @@ export class UserService {
   }
   createUser(user: User): Observable<User> {
 
-    return this.http.post<User>(this.apiUrl, user, { headers: this.getAuthHeaders() }).pipe(
+    return this.http.post<User>(this.apiUrl, user).pipe(
       tap(res => {
         this.users = [];
         this.usersSubject.next(true);
