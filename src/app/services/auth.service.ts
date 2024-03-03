@@ -24,14 +24,21 @@ export interface JwtToken {
   providedIn: 'root'
 })
 export class AuthService {
-  private token = '1234assssssss';
+
   private AUTH_URL = environment.API_AUTH_URL;
   private isLoggedInSubject: BehaviorSubject<boolean>;
   public isLoggedIn$: Observable<boolean>;
+  private currentUserSubject = new BehaviorSubject<UserData | null>(null);
+  public currentUser$ = this.currentUserSubject.asObservable();
 
   constructor(private http: HttpClient) {
     this.isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
     this.isLoggedIn$ = this.isLoggedInSubject.asObservable();
+    const user = this.getUser();
+    if (user) {
+      this.currentUserSubject.next(user);
+    }
+
   }
   signIn(email: string, password: string): Observable<UserData> {
     return this.getUserAuth({ email, password }, 'login');
@@ -41,10 +48,12 @@ export class AuthService {
   private getUserAuth(user: UserAuthData, url: string): Observable<UserData> {
     return this.http.post<JwtToken>(this.AUTH_URL + url, user)
       .pipe(switchMap(response => {
+        const user = response.user;
         localStorage.setItem('jwt', response.access_token);
-        localStorage.setItem('user', JSON.stringify(response.user));
+        localStorage.setItem('user', JSON.stringify(user));
         this.isLoggedInSubject.next(true);
-        return of(response.user);
+        this.currentUserSubject.next(user)
+        return of(user);
 
       }));
   }
@@ -57,6 +66,8 @@ export class AuthService {
   }
   logOut(): void {
     localStorage.removeItem('jwt');
+    localStorage.removeItem('user');
+    this.currentUserSubject.next(null);
     this.isLoggedInSubject.next(false);
   }
   private hasToken(): boolean {
@@ -64,5 +75,12 @@ export class AuthService {
   }
   public getToken(): string | null {
     return window.localStorage.getItem('jwt') ?? null;
+  }
+  public getUser(): UserData | null {
+    const user = window.localStorage.getItem('user') ?? null;
+    if (!user) {
+      return null;
+    }
+    return JSON.parse(user);
   }
 }

@@ -11,6 +11,7 @@
           <a class="nav-link" [routerLinkActiveOptions]="{exact:
 true}" routerLink="/users" routerLinkActive="active" aria-current="page">Home</a>
         </li>
+        @if(isLoggedIn$| async){
         <li class="nav-item">
           <a class="nav-link" [routerLinkActiveOptions]="{exact:
 true}" aria-current="page" routerLinkActive="active" href="#" routerLink="/users">Users</a>
@@ -19,22 +20,33 @@ true}" aria-current="page" routerLinkActive="active" href="#" routerLink="/users
           <a class="nav-link" [routerLinkActiveOptions]="{exact:
 true}" routerLinkActive="active" routerLink="users/create">New User</a>
         </li>
-        <ng-container *ngIf="!(isLoggedIn$| async)">
-          <li class="nav-item">
-            <a class="nav-link" [routerLinkActiveOptions]="{exact:
+        }
+        @if(!(isLoggedIn$| async)){
+        <li class="nav-item">
+          <a class="nav-link" [routerLinkActiveOptions]="{exact:
   true}" routerLinkActive="active" routerLink="/login">Login</a>
-          </li>
+        </li>
 
-          <li class="nav-item">
-            <a class="nav-link" [routerLinkActiveOptions]="{exact:
+        <li class="nav-item">
+          <a class="nav-link" [routerLinkActiveOptions]="{exact:
     true}" routerLinkActive="active" routerLink="/signup">Signup</a>
-          </li>
-        </ng-container>
-        <li class="nav-item" *ngIf="(isLoggedIn$| async)">
+        </li>
+        }
+        @if(isLoggedIn$| async){
+        <li class="nav-item">
           <a class="nav-link" [routerLinkActiveOptions]="{exact:
       true}" routerLinkActive="active" routerLink="/logout" (click)="logout()">Logout</a>
         </li>
+        }
       </ul>
+      @if(user){
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <span class="text-white">Welcome {{user.name}} {{user.lastName}}</span>
+        </li>
+      </ul>
+
+      }
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
