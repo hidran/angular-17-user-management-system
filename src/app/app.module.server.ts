@@ -8,7 +8,8 @@ import { AppComponent } from './app.component';
   imports: [
     AppModule,
     ServerModule,
+
   ],
   bootstrap: [AppComponent],
 })
-export class AppServerModule {}
+export class AppServerModule { }

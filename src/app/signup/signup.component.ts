@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -13,7 +13,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+
   ) {
     this.signupForm = formBuilder.group({
       username: ['', [Validators.required, Validators.min(4)]],
@@ -31,9 +32,18 @@ export class SignupComponent implements OnInit {
     console.log(this.signupForm)
     if (this.signupForm.valid) {
       const { username, email, password } = this.signupForm.value;
-      this.auth.signUp(username, email, password).subscribe(() => {
-        this.router.navigate(['/']);
-      });
+      this.auth.signUp(username, email, password).subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (error => Swal.fire({
+          title: 'Error!',
+          text: error.message,
+          icon: 'error',
+          confirmButtonText: 'Close'
+        }))
+      }
+      );
 
 
     }

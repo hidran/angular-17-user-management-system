@@ -12,7 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { AuthInterceptor } from './services/auth.interceptor';
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,11 +27,13 @@ import { AuthInterceptor } from './services/auth.interceptor';
 
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    provideAnimationsAsync()
 
   ],
   bootstrap: [AppComponent],
   imports: [
+    MatSnackBarModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
